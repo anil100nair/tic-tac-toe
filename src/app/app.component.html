@@ -1,0 +1,43 @@
+<div class="jumbotron">
+  <h1 class="display-3 text-center">TIC TAC TOE</h1>
+  <hr class="my-0">
+</div>
+
+<div class="container d-flex justify-content-center">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" >New Game</button>
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">NEW GAME</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username">
+            <legend class="col-form-legend">Naughts or Crosses?</legend>
+            <label class="custom-control custom-radio">
+              <input id="naught" name="xo" type="radio" class="custom-control-input" checked>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Naught</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="cross" name="xo" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Cross</span>
+            </label>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">PLAY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container d-flex justify-content-center">
+  <board></board>
+</div>

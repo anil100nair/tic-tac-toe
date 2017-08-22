@@ -1,0 +1,6 @@
+<div class="row" *ngFor="let row of [0,1,2]">
+    <square *ngFor="let col of [0,1,2]" [state]="squares[col + row*3]" (click)="makeMove(col + row*3)" ></square>
+</div>
+<div class="row">
+    <div class="status">{{status}}</div>
+</div>
