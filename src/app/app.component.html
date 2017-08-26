@@ -5,6 +5,9 @@
 
 <div class="container d-flex justify-content-center">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" >New Game</button>
+  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#highScoresModal" > High Scores </button>
+
+  <!--New Game Modal-->
   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -16,19 +19,53 @@
         </div>
         <div class="modal-body">
           <form>
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username">
-            <legend class="col-form-legend">Naughts or Crosses?</legend>
-            <label class="custom-control custom-radio">
-              <input id="naught" name="xo" type="radio" class="custom-control-input" checked>
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Naught</span>
+            <!--<label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username">-->
+            <legend class="col-form-legend">Number of Players?</legend>
+            <label class="form-check-label">
+              <input id="onePlayer" name="players" type="radio" value=1 [(ngModel)]="players" (click)="single()" checked>
+              <span class="custom-control-description">Single Player</span>
             </label>
-            <label class="custom-control custom-radio">
-              <input id="cross" name="xo" type="radio" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Cross</span>
+            <label class="form-check-label">
+              <input id="twoPlayer" name="players" type="radio" value=2 [(ngModel)]="players" (click)="dual()" >
+              <span class="custom-control-description">Multi Player</span>
             </label>
+            <div *ngIf="players==1">
+              <legend class="col-form-legend">Naughts or Crosses?</legend>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <input type="radio" name="xo" (click)="iwantx()" aria-label="Radio button for following text input" checked>
+                  </span>
+                  <span class="input-group-addon">X</span>
+                  <input type="text" class="form-control" value="{{xplayer}}" aria-label="Text input with radio button" [disabled]="!ocomp">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <input type="radio" name="xo" (click)="iwanto()" aria-label="Radio button for following text input">
+                  </span>
+                  <span class="input-group-addon">O</span>
+                  <input type="text" class="form-control" value="{{oplayer}}" aria-label="Text input with radio button" [disabled]="ocomp">
+                </div>
+              </div>
+            </div>
+            <div *ngIf="players==2">
+              <legend class="col-form-legend">Naughts or Crosses?</legend>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">X</span>
+                  <input type="text" class="form-control" value="{{xplayer}}" aria-label="Text input with radio button" >
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="input-group">
+                  <span class="input-group-addon">O</span>
+                  <input type="text" class="form-control" value="{{oplayer}}" aria-label="Text input with radio button" >
+                </div>
+              </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -37,7 +74,52 @@
       </div>
     </div>
   </div>
-</div>
+
+  <!--High Scores Modal-->
+  <div class="modal fade" id="highScoresModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">HGIH SCORES</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <table id="highScores" class="table table-striped">
+              <thead class="thead-inverse">
+                <tr>
+                  <th (click)="sortTable(0)">#</th>
+                  <th (click)="sortTable(1)">Player Name</th>
+                  <th (click)="sortTable(2)">Wins</th>
+                  <th (click)="sortTable(3)">Loss</th>
+                  <th (click)="sortTable(4)">Draw</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let scorer of highScores; let i = index" >
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{ scorer.name | uppercase }}</td>
+                  <td>{{scorer.wins}}</td>
+                  <td>{{scorer.loss}}</td>
+                  <td>{{scorer.draw}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">PLAY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+
+
+<!--Game Board-->
 <div class="container d-flex justify-content-center">
   <board></board>
 </div>
