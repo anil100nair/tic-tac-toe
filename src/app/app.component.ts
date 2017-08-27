@@ -1,32 +1,28 @@
 import { Component } from '@angular/core';
-import { CapitalizePipe } from './capitalize.pipe';
-
+import { ScoreService } from './services/score.service';
+import { Score } from './score.model';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
+  providers: [ScoreService]
 })
 export class AppComponent  {
+  highScores: Score[];
   players: number = 1;
   ocomp: boolean = true;
   xplayer: string = "Player";
   oplayer: string = "Computer";
-  highScores = [{"name": "anil", "wins":100, "loss":0, "draw":13},
-                {"name": "raghu", "wins":345,"loss":4, "draw":78},
-                {"name": "ramesh", "wins":567,"loss":450, "draw":34},
-                {"name": "rob", "wins":345,"loss":567, "draw":5},
-                {"name": "Nancy", "wins":5,"loss":45, "draw":2},
-                {"name": "dugh", "wins":78,"loss":12, "draw":78},
-                {"name": "chikara", "wins":4,"loss":10, "draw":56}
-  ];
   
+  constructor(private scoreService: ScoreService) {
+    this.scoreService.getScores()
+        .subscribe(scores => {
+          this.highScores = scores;
+        });
+  }
+
   single(): void {
-    // console.log(this.players);
     this.xplayer = "Player";
     this.oplayer = "Computer";
-    for (let scorer of this.highScores) {
-    console.log(scorer, scorer.name);
-    
-  }
   }
 
   dual(): void {
@@ -58,7 +54,6 @@ export class AppComponent  {
       //start by saying: no switching is done:
       switching = false;
       rows = table.getElementsByTagName("TR");
-      console.log(rows);
       /*Loop through all table rows (except the
       first, which contains table headers):*/
       for (i = 1; i < (rows.length - 1); i++) {

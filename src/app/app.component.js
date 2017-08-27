@@ -5,30 +5,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var score_service_1 = require("./services/score.service");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(scoreService) {
+        var _this = this;
+        this.scoreService = scoreService;
         this.players = 1;
         this.ocomp = true;
         this.xplayer = "Player";
         this.oplayer = "Computer";
-        this.highScores = [{ "name": "anil", "wins": 100, "loss": 0, "draw": 13 },
-            { "name": "raghu", "wins": 345, "loss": 4, "draw": 78 },
-            { "name": "ramesh", "wins": 567, "loss": 450, "draw": 34 },
-            { "name": "rob", "wins": 345, "loss": 567, "draw": 5 },
-            { "name": "Nancy", "wins": 5, "loss": 45, "draw": 2 },
-            { "name": "dugh", "wins": 78, "loss": 12, "draw": 78 },
-            { "name": "chikara", "wins": 4, "loss": 10, "draw": 56 }
-        ];
+        this.scoreService.getScores()
+            .subscribe(function (scores) {
+            _this.highScores = scores;
+        });
     }
     AppComponent.prototype.single = function () {
-        // console.log(this.players);
         this.xplayer = "Player";
         this.oplayer = "Computer";
-        for (var _i = 0, _a = this.highScores; _i < _a.length; _i++) {
-            var scorer = _a[_i];
-            console.log(scorer, scorer.name);
-        }
     };
     AppComponent.prototype.dual = function () {
         this.xplayer = "Player 1";
@@ -56,7 +53,6 @@ var AppComponent = (function () {
             //start by saying: no switching is done:
             switching = false;
             rows = table.getElementsByTagName("TR");
-            console.log(rows);
             /*Loop through all table rows (except the
             first, which contains table headers):*/
             for (i = 1; i < (rows.length - 1); i++) {
@@ -107,7 +103,9 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: './app.component.html',
-    })
+        providers: [score_service_1.ScoreService]
+    }),
+    __metadata("design:paramtypes", [score_service_1.ScoreService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
