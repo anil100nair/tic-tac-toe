@@ -3,6 +3,7 @@
   <hr class="my-0">
 </div>
 
+<!--Game Board-->
 <div class="container d-flex justify-content-center">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" >New Game</button>
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#highScoresModal" > High Scores </button>
@@ -23,14 +24,14 @@
             <input type="text" class="form-control" id="username" placeholder="Username">-->
             <legend class="col-form-legend">Number of Players?</legend>
             <label class="form-check-label">
-              <input id="onePlayer" name="players" type="radio" value=1 [(ngModel)]="players" (click)="single()" checked>
+              <input id="onePlayer" name="Players" type="radio" value=1 [(ngModel)]="noOfPlayers" (click)="singlePlayer()" checked>
               <span class="custom-control-description">Single Player</span>
             </label>
             <label class="form-check-label">
-              <input id="twoPlayer" name="players" type="radio" value=2 [(ngModel)]="players" (click)="dual()" >
+              <input id="twoPlayer" name="Players" type="radio" value=2 [(ngModel)]="noOfPlayers" (click)="twoPlayer()" >
               <span class="custom-control-description">Multi Player</span>
             </label>
-            <div *ngIf="players==1">
+            <div *ngIf="noOfPlayers==1">
               <legend class="col-form-legend">Naughts or Crosses?</legend>
               <div class="col-lg-6">
                 <div class="input-group">
@@ -38,7 +39,7 @@
                     <input type="radio" name="xo" (click)="iwantx()" aria-label="Radio button for following text input" checked>
                   </span>
                   <span class="input-group-addon">X</span>
-                  <input type="text" class="form-control" value="{{xplayer}}" aria-label="Text input with radio button" [disabled]="!ocomp">
+                  <input type="text" name="SXPlayer" class="form-control" [(ngModel)]="xPlayer" aria-label="Text input with radio button" [disabled]="!oComp">
                 </div>
               </div>
               <div class="col-lg-6">
@@ -47,29 +48,29 @@
                     <input type="radio" name="xo" (click)="iwanto()" aria-label="Radio button for following text input">
                   </span>
                   <span class="input-group-addon">O</span>
-                  <input type="text" class="form-control" value="{{oplayer}}" aria-label="Text input with radio button" [disabled]="ocomp">
+                  <input type="text" name="SOPlayer" class="form-control" [(ngModel)]="oPlayer" aria-label="Text input with radio button" [disabled]="oComp">
                 </div>
               </div>
             </div>
-            <div *ngIf="players==2">
+            <div *ngIf="noOfPlayers==2">
               <legend class="col-form-legend">Naughts or Crosses?</legend>
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">X</span>
-                  <input type="text" class="form-control" value="{{xplayer}}" aria-label="Text input with radio button" >
+                  <input type="text" name="DXPlayer" class="form-control" [(ngModel)]="xPlayer" aria-label="Text input with radio button" >
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="input-group">
                   <span class="input-group-addon">O</span>
-                  <input type="text" class="form-control" value="{{oplayer}}" aria-label="Text input with radio button" >
+                  <input type="text" name="DOPlayer" class="form-control" [(ngModel)]="oPlayer" aria-label="Text input with radio button" >
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">PLAY</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)=newGame() >PLAY</button>
         </div>
       </div>
     </div>
@@ -110,16 +111,20 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">PLAY</button>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-danger">Close</button>
         </div>
       </div>
     </div>
   </div>
-</div><br>
-
-
-
-<!--Game Board-->
+</div>
+<br><br>
+<div class="container d-flex justify-content-center" *ngFor="let row of [0,1,2]">
+  <div class="row" >
+    <square *ngFor="let col of [0,1,2]" [state]="squares[col + row*3]" (click)="makeMove(col + row*3)" ></square>
+  </div>
+</div>
 <div class="container d-flex justify-content-center">
-  <board></board>
+  <div class="row">
+    <div class="status">{{status}}</div>
+  </div>
 </div>

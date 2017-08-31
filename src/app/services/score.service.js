@@ -14,11 +14,34 @@ require("rxjs/add/operator/map");
 var ScoreService = (function () {
     function ScoreService(http) {
         this.http = http;
-        console.log('Score Service Initiated...');
     }
     ScoreService.prototype.getScores = function () {
-        console.log('Inside getScore()');
+        // console.log('service get all');
         return this.http.get('/api/')
+            .map(function (res) { return res.json(); });
+    };
+    ScoreService.prototype.getScore = function (id) {
+        // console.log('service get one');
+        return this.http.get('/api/' + id)
+            .map(function (res) { return res.json(); });
+    };
+    ScoreService.prototype.addScore = function (score) {
+        // console.log('service post');
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/api/', JSON.stringify(score), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    ScoreService.prototype.deleteScore = function (id) {
+        // console.log('service delete');
+        return this.http.delete('/api/' + id)
+            .map(function (res) { return res.json(); });
+    };
+    ScoreService.prototype.updateScore = function (updScore) {
+        // console.log('service put');
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.put('/api/' + updScore._id, JSON.stringify(updScore), { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return ScoreService;

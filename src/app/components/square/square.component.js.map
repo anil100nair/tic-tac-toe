@@ -1,1 +1,0 @@
-{"version":3,"file":"square.component.js","sourceRoot":"","sources":["square.component.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,sCAAiD;AAOjD,IAAa,eAAe;IAA5B;IAEA,CAAC;IAAD,sBAAC;AAAD,CAAC,AAFD,IAEC;AADY;IAAR,YAAK,EAAE;;8CAAe;AADd,eAAe;IAL3B,gBAAS,CAAC;QACT,QAAQ,EAAE,QAAQ;QAClB,WAAW,EAAE,yBAAyB;QACtC,SAAS,EAAE,CAAE,wBAAwB,CAAE;KACxC,CAAC;GACW,eAAe,CAE3B;AAFY,0CAAe"}

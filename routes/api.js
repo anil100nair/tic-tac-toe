@@ -5,46 +5,50 @@ var db = mongojs('mongodb://tictactoeuser:tic@ds036617.mlab.com:36617/tic-tac-to
 
 //Get All Scores
 router.get('/', (req, res, next) => {
+    // console.log('From api/get all');
     db.tictactoe.find(function(err, scores) {
         if(err){
             res.send(err);
         }
-        res.json(scores)
+        res.json(scores);
     });
     
 });
 
 //Get Single Scores
 router.get('/:id', (req, res, next) => {
+    // console.log('from api/get one');
     db.tictactoe.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, score) {
         if(err){
             res.send(err);
         }
-        res.json(score)
+        res.json(score);
     });
     
 });
 
 //Save Score
 router.post('/', (req, res, next) => {
-    var player = req.body;
-    if(!player.name || !(player.wins)){
+    console.log('From api/post');
+    var score = req.body;
+    if(!score.name || !(score.wins+'')){
         res.status(400);
         res.json({
             "error": "Bad Data"
         });
     } else {
-        db.tictactoe.save(player, (err, task) => {
+        db.tictactoe.save(score, (err, task) => {
             if (err) {
                 res.send(err);
             }
-            res.json(player);
+            res.json(score);
         });
     }
 });
 
 //Delete Score
 router.delete('/:id', (req, res, next) => {
+    // console.log('from api/delete');
     db.tictactoe.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, score) {
         if(err){
             res.send(err);
@@ -56,22 +60,23 @@ router.delete('/:id', (req, res, next) => {
 
 //Update Score
 router.put('/:id', (req, res, next) => {
+    // console.log('From api/put');
     var score = req.body;
     var updScore = {};
 
-    if(score.name) {
-        updScore = score.name;
+    if(score.name !== null) {
+        updScore.name = score.name;
     }
 
-    if(score.wins) {
+    if(score.wins !== null) {
         updScore.wins = score.wins;
     }
 
-    if(score.loss) {
+    if(score.loss !== null) {
         updScore.loss = score.loss;
     }
 
-    if(score.draw) {
+    if(score.draw !== null) {
         updScore.draw = score.draw;
     }
 

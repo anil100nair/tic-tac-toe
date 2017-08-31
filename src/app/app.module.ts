@@ -1,21 +1,19 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule} from  '@angular/http';
 
 import { AppComponent }  from './app.component';
-import { BoardComponent } from './components/board/board.component';
-import { SquareComponent } from './components/square/square.component';
+import { SquaresComponent } from './components/squares/squares.component';
 
 @NgModule({
   imports:      [ BrowserModule,
                   FormsModule,
-                  HttpModule
-   ],
+                  HttpModule 
+                ],
   declarations: [ AppComponent,
-                  BoardComponent,
-                  SquareComponent
-   ],
+                  SquaresComponent
+                ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

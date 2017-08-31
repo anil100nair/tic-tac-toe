@@ -9,21 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var SquareComponent = (function () {
-    function SquareComponent() {
+var SquaresComponent = (function () {
+    function SquaresComponent() {
     }
-    return SquareComponent;
+    return SquaresComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", String)
-], SquareComponent.prototype, "state", void 0);
-SquareComponent = __decorate([
+], SquaresComponent.prototype, "state", void 0);
+SquaresComponent = __decorate([
     core_1.Component({
         selector: 'square',
-        templateUrl: './square.component.html',
-        styleUrls: ['./square.component.css']
+        template: "{{state}}",
+        styles: ["\n        :host{\n            width : 100px;\n            height: 100px;\n            border: 1px solid grey;\n            font-size: 75px;\n            text-align: center;\n            padding: auto;\n        }\n"]
     })
-], SquareComponent);
-exports.SquareComponent = SquareComponent;
-//# sourceMappingURL=square.component.js.map
+], SquaresComponent);
+exports.SquaresComponent = SquaresComponent;
+//# sourceMappingURL=squares.component.js.map

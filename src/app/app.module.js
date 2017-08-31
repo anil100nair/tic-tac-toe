@@ -10,8 +10,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
-var board_component_1 = require("./components/board/board.component");
-var square_component_1 = require("./components/square/square.component");
+var squares_component_1 = require("./components/squares/squares.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,8 +23,7 @@ AppModule = __decorate([
             http_1.HttpModule
         ],
         declarations: [app_component_1.AppComponent,
-            board_component_1.BoardComponent,
-            square_component_1.SquareComponent
+            squares_component_1.SquaresComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     })
